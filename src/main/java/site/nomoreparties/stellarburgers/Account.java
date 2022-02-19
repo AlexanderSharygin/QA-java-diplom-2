@@ -5,19 +5,15 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Locale;
 
-
 public class Account {
-
     private String name;
     private String password;
     private String email;
-
 
     public Account(String name, String password, String email) {
         this.name = name;
         this.password = password;
         this.email = email;
-
     }
 
     public static Account getRandom() {
