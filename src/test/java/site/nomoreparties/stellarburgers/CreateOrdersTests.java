@@ -15,8 +15,8 @@ import java.util.List;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
-@Feature("Courier accounts management")
-@Story("Create new account")
+@Feature("Orders management")
+@Story("Create new order")
 public class CreateOrdersTests {
     private static List<Ingredient> allIngredients = new ArrayList<>();
     private static final IngredientsAPI ingredientsAPI = new IngredientsAPI();

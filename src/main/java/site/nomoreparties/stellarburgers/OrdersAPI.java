@@ -27,4 +27,21 @@ public class OrdersAPI extends RestAssuredClient {
                     .post(PATH).then();
         }
     }
+
+    @Step("Get orders list")
+    public ValidatableResponse getOrders(String bearerToken) {
+        if (bearerToken == null) {
+            return given()
+                    .spec(getBaseSpec())
+                    .when()
+                    .get(PATH).then();
+        } else {
+            return given()
+                    .spec(getBaseSpec())
+                    .and()
+                    .header("Authorization", bearerToken)
+                    .when()
+                    .get(PATH).then();
+        }
+    }
 }

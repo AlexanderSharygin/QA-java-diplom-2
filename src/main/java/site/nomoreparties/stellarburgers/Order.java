@@ -8,7 +8,7 @@ import java.util.List;
 public class Order {
 
     @SerializedName("ingredients")
-    String[] ingredientsId;
+    private final String[] ingredientsId;
 
     public Order(List<Ingredient> ingredientsId) {
         if (ingredientsId == null) {
@@ -24,5 +24,9 @@ public class Order {
                 ingredientsId[i] = RandomStringUtils.randomAlphabetic(30);
             }
         }
+    }
+
+    public String[] getIngredients() {
+        return ingredientsId;
     }
 }
