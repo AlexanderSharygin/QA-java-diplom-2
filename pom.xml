@@ -13,7 +13,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <aspectj.version>1.9.7</aspectj.version>
-        <allure.version>2.17.2</allure.version>
+        <allure.version>2.16.1</allure.version>
     </properties>
 
     <dependencies>
@@ -65,12 +65,15 @@
                             <name>listener</name>
                             <value>io.qameta.allure.junit5.AllureJunit5</value>
                         </property>
+
                     </properties>
                     <systemProperties>
                         <property>
-                            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
                         </property>
                     </systemProperties>
+
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -87,6 +90,11 @@
                 <configuration>
                     <reportVersion>2.16.1</reportVersion>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
             </plugin>
         </plugins>
     </build>
