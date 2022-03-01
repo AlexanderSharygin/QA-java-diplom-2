@@ -8,12 +8,10 @@ import java.util.List;
 public class Order {
 
     @SerializedName("ingredients")
-    private final String[] ingredientsId;
+    private String[] ingredientsId;
 
     public Order(List<Ingredient> ingredientsId) {
-        if (ingredientsId == null) {
-            this.ingredientsId = null;
-        } else {
+        if (ingredientsId != null) {
             this.ingredientsId = ingredientsId.stream().map(k -> k.id).toArray(String[]::new);
         }
     }

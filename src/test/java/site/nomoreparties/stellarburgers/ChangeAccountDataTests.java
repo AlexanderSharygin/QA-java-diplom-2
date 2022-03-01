@@ -26,6 +26,7 @@ public class ChangeAccountDataTests {
         firstAccount = Account.getRandom();
         ValidatableResponse response = accountAPI.registerNewAccount(firstAccount);
         authTokenFirstAccount = response.assertThat().statusCode(SC_OK).extract().path("accessToken").toString();
+        firstAccount = Account.getRandom();
         secondAccount = Account.getRandom();
         response = accountAPI.registerNewAccount(secondAccount);
         authTokenSecondAccount = response.assertThat().statusCode(SC_OK).extract().path("accessToken").toString();
@@ -34,7 +35,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with correct auth token")
     public void changeAccountDataWithCorrectAuthTokenSuccess() {
-        firstAccount = Account.getRandom();
         accountAPI.editAccount(firstAccount, authTokenFirstAccount).assertThat().
                 statusCode(SC_OK).and().
                 body("success", equalTo(true)).and().
@@ -45,7 +45,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with incorrect auth token")
     public void changeAccountDataWithIncorrectAuthTokenUnauthorized() {
-        firstAccount = Account.getRandom();
         accountAPI.editAccount(firstAccount, RandomStringUtils.randomAlphabetic(30)).assertThat().
                 statusCode(SC_UNAUTHORIZED).and().
                 body("success", equalTo(false)).and().
@@ -55,7 +54,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with empty auth token")
     public void changeAccountDataWithEmptyAuthTokenUnauthorized() {
-        firstAccount = Account.getRandom();
         accountAPI.editAccount(firstAccount, "").assertThat().
                 statusCode(SC_UNAUTHORIZED).and().
                 body("success", equalTo(false)).and().
@@ -65,7 +63,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account without auth token")
     public void changeAccountDataWithoutTokenUnauthorized() {
-        firstAccount = Account.getRandom();
         accountAPI.editAccount(firstAccount, null).assertThat().
                 statusCode(SC_UNAUTHORIZED).and().
                 body("success", equalTo(false)).and().
@@ -75,7 +72,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with correct auth token and with already existed name")
     public void changeAccountDataWithCorrectAuthTokenAndWithAlreadyExistedNameSuccess() {
-        firstAccount = Account.getRandom();
         firstAccount.setName(secondAccount.getName());
         accountAPI.editAccount(firstAccount, authTokenFirstAccount).assertThat().
                 statusCode(SC_OK).and().
@@ -87,7 +83,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with correct auth token and with already existed email")
     public void changeAccountDataWithCorrectAuthTokenAndWithAlreadyExistedEmailForbidden() {
-        firstAccount = Account.getRandom();
         firstAccount.setEmail(secondAccount.getEmail());
         accountAPI.editAccount(firstAccount, authTokenFirstAccount).assertThat().
                 statusCode(SC_FORBIDDEN).and().
@@ -98,7 +93,6 @@ public class ChangeAccountDataTests {
     @Test
     @DisplayName("Edit account with correct auth token and with already existed email")
     public void changeAccountDataWithCorrectAuthTokenAndWithAlreadyExistedPasswordSuccess() {
-        firstAccount = Account.getRandom();
         firstAccount.setPassword(secondAccount.getPassword());
         accountAPI.editAccount(firstAccount, authTokenFirstAccount).assertThat().
                 statusCode(SC_OK).and().
